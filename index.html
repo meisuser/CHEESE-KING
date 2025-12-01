@@ -7,21 +7,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* 🎨 配色盤：奶油、起司、莓果 */
-            --bg-gradient-1: #a18cd1; /* 柔和紫 */
-            --bg-gradient-2: #fbc2eb; /* 柔和粉 */
+            /* 🎨 配色盤調整：背景稍微加深一點點，讓主體更凸顯 */
+            --bg-gradient-1: #917cc2; /* 原本是 #a18cd1，稍微深一點 */
+            --bg-gradient-2: #eca8d9; /* 原本是 #fbc2eb，稍微深一點 */
             
-            --cheese-yellow: #FFD93D; /* 你的 Logo 黃 */
-            --cheese-orange: #FF9F43; /* 按鈕陰影用橘色，比深泥色更和諧 */
+            --cheese-yellow: #FFD93D;
+            --cheese-orange: #FF9F43;
             
-            --panel-bg: rgba(255, 255, 255, 0.85); /* 白色磨砂面板 */
-            --text-main: #5e3c58; /* 深紫灰色文字 */
+            --panel-bg: rgba(255, 255, 255, 0.9); /* 面板稍微不透明一點，增加對比 */
+            --text-main: #5e3c58;
             --text-light: #88607f;
             
-            --input-bg: #F3E5F5; /* 淺紫色輸入框 */
+            --input-bg: #F3E5F5;
             
-            --btn-bg: #FFD93D; /* 主按鈕直接用黃色 */
-            --btn-text: #fff;  /* 白字 */
+            --btn-bg: #FFD93D;
+            --btn-text: #fff;
             
             --accent-red: #FF6B6B;
             --accent-green: #4CD137;
@@ -35,9 +35,9 @@
             padding: 20px; 
             text-align: center;
             min-height: 100vh;
-            /* 背景：柔和的漸層 + 淡淡的圓點紋理 */
+            /* 背景 */
             background-image: 
-                radial-gradient(rgba(255, 255, 255, 0.4) 2px, transparent 2px),
+                radial-gradient(rgba(255, 255, 255, 0.3) 2px, transparent 2px),
                 linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
             background-size: 30px 30px, 100% 100%;
             background-attachment: fixed;
@@ -45,7 +45,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-top: 100px; /* 留空間給 Logo */
+            padding-top: 100px;
         }
 
         .container { 
@@ -53,17 +53,16 @@
             max-width: 800px;
             background: var(--panel-bg); 
             padding: 40px; 
-            padding-top: 70px; /* 避開 Logo */
+            padding-top: 70px;
             border-radius: 40px;
-            /* 輕柔的陰影，不再是黑黑的一坨 */
-            box-shadow: 0 10px 30px rgba(100, 50, 100, 0.1), 
-                        inset 0 0 0 2px rgba(255,255,255,0.5);
+            box-shadow: 0 15px 35px rgba(80, 40, 80, 0.15), /* 陰影稍微加深 */
+                        inset 0 0 0 2px rgba(255,255,255,0.6);
             backdrop-filter: blur(20px);
             position: relative;
             margin-top: 20px;
         }
 
-        /* --- LOGO 懸浮設計 (保持不變但優化光影) --- */
+        /* --- LOGO 區塊 --- */
         .logo-container {
             position: absolute;
             top: -100px;
@@ -79,20 +78,22 @@
 
         .logo-glow {
             position: absolute;
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+            width: 260px;
+            height: 260px;
+            /* 改成更純粹、中心更紮實的白光，讓Logo與深色背景分離 */
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0) 70%);
             top: 20px;
             z-index: -1;
-            filter: blur(20px);
+            /* 不需要旋轉動畫，只做簡單的霧化 */
+            filter: blur(15px);
         }
 
         .game-logo {
             max-width: 90%;
             width: 480px;
             height: auto;
-            /* 投影改成暖色系，讓它跟背景融合 */
-            filter: drop-shadow(0 10px 15px rgba(161, 140, 209, 0.4));
+            /* 投影加深一點點，讓它浮起來 */
+            filter: drop-shadow(0 12px 20px rgba(94, 60, 88, 0.3));
             transform: rotate(-3deg);
             pointer-events: auto;
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -113,7 +114,7 @@
             text-transform: uppercase;
         }
 
-        /* 輸入框 - 改成清爽風格 */
+        /* 輸入框 */
         input, select { 
             width: 100%; 
             padding: 18px; 
@@ -140,16 +141,15 @@
             transform: scale(1.01);
         }
 
-        /* 按鈕：變成像是起司塊的感覺 */
+        /* 按鈕 */
         button { 
             width: 100%; 
             padding: 18px; 
             margin: 15px 0; 
             border-radius: 50px;
             border: none;
-            background-color: var(--cheese-yellow); /* 黃底 */
-            color: #5e3c58; /* 深紫字，對比清楚 */
-            /* 橘色陰影，看起來很好吃 */
+            background-color: var(--cheese-yellow);
+            color: #5e3c58;
             box-shadow: 0 6px 0 var(--cheese-orange), 0 10px 20px rgba(0,0,0,0.1);
             font-size: 24px;
             font-weight: 800;
@@ -180,7 +180,7 @@
             transform: none;
         }
 
-        /* 次要按鈕 - 柔和紫 */
+        /* 次要按鈕 */
         .button-secondary {
             background-color: #a18cd1;
             color: white;
@@ -219,7 +219,6 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        /* 題目框 - 乾淨白卡片 */
         .question-box { 
             background: white; 
             color: var(--text-main);
@@ -227,7 +226,6 @@
             font-size: 24px; font-weight: 700;
             margin: 25px 0; min-height: 120px;
             display: flex; align-items: center; justify-content: center;
-            /* 像便利貼一樣微微翹起 */
             box-shadow: 0 10px 20px rgba(161, 140, 209, 0.15);
             border: 2px solid var(--input-bg);
         }
@@ -245,7 +243,6 @@
             background: #FFFDF5;
         }
         
-        /* 正確錯誤顏色調整得更粉嫩一點 */
         .correct { background: var(--accent-green) !important; color: #fff !important; box-shadow: 0 6px 0 #218c74 !important; border:none !important;}
         .wrong { background: var(--accent-red) !important; color: #fff !important; box-shadow: 0 6px 0 #b33939 !important; animation: shake 0.5s; border:none !important;}
 
@@ -284,7 +281,7 @@
             font-size: 64px; 
             color: var(--cheese-yellow); 
             font-weight: 800; margin: 20px 0; 
-            text-shadow: 3px 3px 0 #FF9F43; /* 橘色陰影 */
+            text-shadow: 3px 3px 0 #FF9F43;
         }
         #feedbackText { height: 30px; font-weight: 700; font-size: 24px; margin-top: 15px; text-shadow:none; }
 
@@ -296,7 +293,8 @@
     
     <!-- Logo 浮在容器上面 -->
     <div class="logo-container">
-        <div class="logo-glow"></div> <!-- 柔和白光 -->
+        <!-- 這裡改成了單純的白色聚光燈 -->
+        <div class="logo-glow"></div> 
         <img src="https://raw.githubusercontent.com/meisuser/cheese-king-images/refs/heads/main/logo.png" alt="Cheese King" class="game-logo">
     </div>
 
