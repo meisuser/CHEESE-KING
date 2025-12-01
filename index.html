@@ -7,14 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* 🎨 配色盤調整：背景稍微加深一點點，讓主體更凸顯 */
-            --bg-gradient-1: #917cc2; /* 原本是 #a18cd1，稍微深一點 */
-            --bg-gradient-2: #eca8d9; /* 原本是 #fbc2eb，稍微深一點 */
+            /* 🎨 配色盤調整：維持上一版稍微深一點的背景 */
+            --bg-gradient-1: #917cc2; 
+            --bg-gradient-2: #eca8d9; 
             
             --cheese-yellow: #FFD93D;
             --cheese-orange: #FF9F43;
             
-            --panel-bg: rgba(255, 255, 255, 0.9); /* 面板稍微不透明一點，增加對比 */
+            --panel-bg: rgba(255, 255, 255, 0.9);
             --text-main: #5e3c58;
             --text-light: #88607f;
             
@@ -55,7 +55,7 @@
             padding: 40px; 
             padding-top: 70px;
             border-radius: 40px;
-            box-shadow: 0 15px 35px rgba(80, 40, 80, 0.15), /* 陰影稍微加深 */
+            box-shadow: 0 15px 35px rgba(80, 40, 80, 0.15),
                         inset 0 0 0 2px rgba(255,255,255,0.6);
             backdrop-filter: blur(20px);
             position: relative;
@@ -78,21 +78,22 @@
 
         .logo-glow {
             position: absolute;
-            width: 260px;
-            height: 260px;
-            /* 改成更純粹、中心更紮實的白光，讓Logo與深色背景分離 */
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0) 70%);
-            top: 20px;
+            /* 尺寸縮小，克制一點 */
+            width: 180px;
+            height: 180px;
+            /* 降低不透明度 (0.6)，讓光暈變得很淡，像是一層薄霧 */
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 70%);
+            top: 40px; /* 位置微調，確保在 Logo 正中心 */
             z-index: -1;
-            /* 不需要旋轉動畫，只做簡單的霧化 */
-            filter: blur(15px);
+            /* 增加模糊度，讓邊緣更柔和 */
+            filter: blur(20px);
         }
 
         .game-logo {
             max-width: 90%;
             width: 480px;
             height: auto;
-            /* 投影加深一點點，讓它浮起來 */
+            /* 投影維持深色，確保立體感 */
             filter: drop-shadow(0 12px 20px rgba(94, 60, 88, 0.3));
             transform: rotate(-3deg);
             pointer-events: auto;
@@ -293,7 +294,7 @@
     
     <!-- Logo 浮在容器上面 -->
     <div class="logo-container">
-        <!-- 這裡改成了單純的白色聚光燈 -->
+        <!-- 縮小並調暗的光暈 -->
         <div class="logo-glow"></div> 
         <img src="https://raw.githubusercontent.com/meisuser/cheese-king-images/refs/heads/main/logo.png" alt="Cheese King" class="game-logo">
     </div>
