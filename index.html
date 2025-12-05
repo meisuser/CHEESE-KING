@@ -562,9 +562,15 @@
             try {
                 const response = await fetch(topic.url);
                 const text = await response.text();
-                // 讀取 CSV 第一行第一格
+                
+                // 讀取 CSV 第一行
                 const firstLine = text.split('\n')[0]; 
-                const topicName = firstLine.split(',')[0].replace(/"/g, '') || topic.default; // 去除引號
+                // 分割欄位
+                const columns = firstLine.split(',');
+                // 獲取 G1 (第7欄，索引為6)，如果不存在則使用預設
+                const g1Cell = columns[6];
+                
+                const topicName = (g1Cell ? g1Cell.replace(/"/g, '').trim() : '') || topic.default;
 
                 const option = document.createElement('option');
                 option.value = topic.url;
