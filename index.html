@@ -28,13 +28,12 @@
             background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
             color: var(--text-main);
             display: flex;
-            flex-direction: column; /* 垂直排列：上Logo 下面板 */
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             overflow-x: hidden;
         }
 
-        /* 🧀 背景動態起司氣泡 */
         .cheese-bg-circles {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -58,7 +57,6 @@
             100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- LOGO 區塊 --- */
         .logo-container {
             width: 100%;
             display: flex;
@@ -69,7 +67,6 @@
             padding-top: 20px;
         }
 
-        /* --- ✨ LOGO 樣式 (扁平陰影 + 物理回彈) --- */
         .game-logo {
             width: 380px;
             max-width: 90%; 
@@ -86,7 +83,6 @@
             filter: drop-shadow(0 15px 10px rgba(161, 140, 209, 0.5));
         }
 
-        /* 主容器：牛奶白面板 */
         .container { 
             width: 100%;
             max-width: 900px; 
@@ -102,7 +98,6 @@
             align-items: center;
         }
         
-        /* 雙欄佈局 (登入頁用) */
         .split-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -111,16 +106,14 @@
             margin-top: 10px;
         }
 
-        /* --- 🚀 新版大廳 (Lobby) 專用樣式 --- */
         .lobby-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 左右兩欄 */
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
             width: 100%;
             margin-top: 20px;
         }
 
-        /* 動作卡片 (創建/加入) 共同樣式 */
         .lobby-action-card {
             border-radius: 25px;
             padding: 25px;
@@ -141,13 +134,11 @@
             z-index: 10;
         }
 
-        /* 🎨 創建房間卡片 (奶油黃風格) */
         .card-create {
             background: linear-gradient(135deg, #FFF9C4 0%, #FFF 100%);
             border-color: #FFF176;
         }
 
-        /* 🎨 加入房間卡片 (夢幻紫風格) */
         .card-join {
             background: linear-gradient(135deg, #F3E5F5 0%, #FFF 100%);
             border-color: #E1BEE7;
@@ -190,7 +181,6 @@
         .btn-purple:hover { filter: brightness(1.05); }
         .btn-purple:active { box-shadow: 0 0 0 #ba68c8; top: 6px; }
 
-        /* 一般內部卡片 */
         .panel-card {
             background: #fff;
             border-radius: 30px;
@@ -206,7 +196,6 @@
             transition: transform 0.2s;
         }
 
-        /* 頂部標籤 */
         .panel-label {
             position: absolute;
             top: -18px;
@@ -233,7 +222,6 @@
             box-shadow: 0 10px 0 rgba(0,0,0,0.05);
         }
 
-        /* 輸入框 */
         input, select { 
             width: 100%; 
             padding: 15px; 
@@ -255,7 +243,6 @@
             box-shadow: 0 0 0 4px rgba(255, 217, 61, 0.3);
         }
 
-        /* 按鈕風格 */
         button { 
             width: 100%; 
             padding: 16px; 
@@ -286,13 +273,11 @@
         
         button:disabled { background: #e0e0e0; color: #aaa; box-shadow: 0 6px 0 #bdbdbd; cursor: not-allowed; }
 
-        /* 規則文字 */
         .rules-content { text-align: center; color: var(--text-main); }
         .rules-icon { font-size: 64px; margin-bottom: 20px; }
         
         .hidden { display: none !important; }
 
-        /* 切換登入/註冊的文字連結 */
         .auth-toggle-link {
             font-size: 14px;
             color: var(--text-sub);
@@ -302,7 +287,6 @@
         }
         .auth-toggle-link:hover { color: var(--text-main); }
 
-        /* 修正漸層文字顯示 */
         #displayName {
             background: linear-gradient(to right, #a18cd1, #fbc2eb);
             background-clip: text;
@@ -311,7 +295,6 @@
             filter: drop-shadow(0 2px 0 rgba(0,0,0,0.1));
         }
 
-        /* --- 📱 手機版 RWD 修正 --- */
         @media (max-width: 768px) {
             body { 
                 padding: 15px; 
@@ -335,7 +318,6 @@
             .panel-card { min-height: auto; padding: 35px 20px 25px 20px; }
         }
 
-        /* --- 遊戲內元素 --- */
         .game-header {
             display: flex; justify-content: space-between; align-items: center;
             background: #fff; padding: 15px 25px;
@@ -389,7 +371,6 @@
 </head>
 <body>
 
-<!-- 背景動態氣泡 -->
 <div class="cheese-bg-circles">
     <div class="bg-circle"></div>
     <div class="bg-circle"></div>
@@ -398,29 +379,21 @@
     <div class="bg-circle"></div>
 </div>
 
-<!-- Logo 區塊 -->
 <div class="logo-container">
     <img src="https://raw.githubusercontent.com/meisuser/cheese-king-images/refs/heads/main/logo.png" alt="Cheese King" class="game-logo">
 </div>
 
-<!-- 主容器 -->
 <div class="container">
     
-    <!-- 1. 登入/註冊區 (雙欄佈局) -->
     <div id="loginSection" class="split-layout">
-        <!-- 左邊：帳號密碼 -->
         <div class="panel-card">
             <div class="panel-label" id="authTitle">登入遊戲</div>
             <div class="avatar-placeholder">🥸</div>
-            
             <input type="text" id="username" placeholder="輸入帳號 (暱稱)" maxlength="12">
             <input type="password" id="password" placeholder="輸入密碼" maxlength="12">
-            
             <button class="btn-primary" id="authBtn" onclick="handleAuth()">登入</button>
             <div class="auth-toggle-link" id="authToggle" onclick="toggleAuthMode()">還沒註冊？點此創建帳號</div>
         </div>
-
-        <!-- 右邊：遊戲規則 -->
         <div class="panel-card" style="background: rgba(255,255,255,0.6);">
             <div class="panel-label">遊戲規則</div>
             <div class="rules-content">
@@ -436,7 +409,6 @@
         </div>
     </div>
 
-    <!-- 2. 大廳區 -->
     <div id="lobbySection" class="hidden panel-card" style="width: 100%; border:none; background: transparent; box-shadow: none; min-height: auto; padding: 0;">
         <div style="text-align: center; margin-bottom: 10px;">
             <h3 style="margin: 0; font-size: 22px; color: var(--text-sub);">歡迎回來</h3>
@@ -470,7 +442,6 @@
         </div>
     </div>
 
-    <!-- 3. 等待室 -->
     <div id="waitingSection" class="hidden panel-card" style="width: 100%;">
         <h3 style="color: var(--text-sub); margin-bottom: 5px;">房間代碼</h3>
         <div class="room-code-display" id="displayRoomCode"></div>
@@ -483,7 +454,6 @@
         <p id="guestMessage" class="hidden" style="font-size: 18px; margin-top: 30px; color: var(--text-sub);">等待房主開始...</p>
     </div>
 
-    <!-- 4. 遊戲區 -->
     <div id="gameSection" class="hidden" style="width: 100%;">
         <div class="game-header">
             <div class="score-box">我方 <span><span id="myScore">0</span></span></div>
@@ -502,7 +472,6 @@
         <p id="feedbackText" style="height: 30px; font-weight: 700; font-size: 24px; margin-top: 15px; text-align: center;"></p>
     </div>
 
-    <!-- 5. 結算區 -->
     <div id="resultSection" class="hidden panel-card" style="width: 100%;">
         <h2 style="color:var(--text-sub); letter-spacing: 2px;">遊戲結束</h2>
         <div class="avatar-placeholder" style="width: 130px; height: 130px; font-size: 65px; margin: 20px 0;">🏆</div>
@@ -539,16 +508,19 @@
     let currentRoomId = "";
     let playerRole = "";
     let questions = [];
-    let localQIndex = -1; // 本地記錄的題號，用來比對 Server 是否換題
+    let localQIndex = -1; 
     let score = 0;
     let syncTimerInterval;
     let totalQuestions = 5;
     let roomSeed = 0;
     
-    // 登入狀態變數
+    // 🔐 核心鎖：防止重複過渡
+    let isTransitioning = false;
+    // 🔐 本地答題鎖：防止一題多答
+    let localHasAnswered = false;
+
     let isRegisterMode = false;
 
-    // --- 🛠️ 預先載入：動態讀取題庫名稱 ---
     async function initTopicSelect() {
         const select = document.getElementById('topicSelect');
         const topics = [
@@ -556,20 +528,15 @@
             {url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSjT8ACYkO2ybmy2kjW1BFr6HMVPqHtK1hmAf2tj4KgWrOQE2k3bEm8XOGvBVEyoRB6w9Qc9tV9mTXT/pub?output=csv",}
         ];
 
-        select.innerHTML = ""; // 清空
+        select.innerHTML = ""; 
 
         for (const topic of topics) {
             try {
                 const response = await fetch(topic.url);
                 const text = await response.text();
-                
-                // 讀取 CSV 第一行
                 const firstLine = text.split('\n')[0]; 
-                // 分割欄位
                 const columns = firstLine.split(',');
-                // 獲取 G1 (第7欄，索引為6)，如果不存在則使用預設
                 const g1Cell = columns[6];
-                
                 const topicName = (g1Cell ? g1Cell.replace(/"/g, '').trim() : '') || topic.default;
 
                 const option = document.createElement('option');
@@ -577,7 +544,6 @@
                 option.text = "📋 " + topicName;
                 select.appendChild(option);
             } catch (e) {
-                // 失敗時使用預設名稱
                 const option = document.createElement('option');
                 option.value = topic.url;
                 option.text = "📋 " + topic.default;
@@ -585,10 +551,7 @@
             }
         }
     }
-    // 頁面載入時執行
     initTopicSelect();
-
-    // --- 🔐 登入/註冊 邏輯 ---
 
     window.toggleAuthMode = () => {
         isRegisterMode = !isRegisterMode;
@@ -684,14 +647,11 @@
         if(isRegisterMode) window.toggleAuthMode();
     }
 
-    // --- 🎮 遊戲核心邏輯 ---
-
     window.createRoom = () => {
         const roomCode = Math.floor(1000 + Math.random() * 9000).toString();
         const topicUrl = document.getElementById('topicSelect').value;
         const seed = Math.random();
         
-        // 🆕 初始化時加入時間控制欄位
         const roomRef = ref(db, 'rooms/' + roomCode);
         set(roomRef, {
             host: myName,
@@ -701,13 +661,12 @@
             hostScore: 0,
             guestScore: 0,
             seed: seed,
-            currentQIndex: -1, // -1 代表還沒開始
-            qStartTime: 0,      // 題目開始的時間戳
+            currentQIndex: -1, 
+            qStartTime: 0,      
             hostAnswered: false,
             guestAnswered: false
         });
 
-        // 設定斷線自動刪除房間
         onDisconnect(roomRef).remove();
 
         currentRoomId = roomCode;
@@ -745,11 +704,9 @@
         });
     }
 
-    // 🆕 核心監聽邏輯：改為監聽 "currentQIndex" 來同步
     function listenToRoom(roomId) {
         onValue(ref(db, 'rooms/' + roomId), (snapshot) => {
             const data = snapshot.val();
-            // 如果房間被刪除（例如房主斷線）
             if(!data) {
                 if(currentRoomId) {
                     alert("房主已離開，房間已解散！");
@@ -760,7 +717,6 @@
 
             if(data.seed) roomSeed = data.seed;
 
-            // 1. 更新等待室介面
             let listHtml = `<div style="background:#FFFDF5; padding:15px; border-radius:15px; color:var(--text-main); font-weight:700; border:2px solid var(--cheese-yellow);">👑 房主: ${data.host}</div>`;
             if(data.guest) {
                 listHtml += `<div style="background:#fff; padding:15px; border-radius:15px; color:var(--text-main); font-weight:700; border:2px solid #ddd; margin-top:10px;">⚔️ 挑戰者: ${data.guest}</div>`;
@@ -771,7 +727,6 @@
             }
             document.getElementById('playersList').innerHTML = listHtml;
 
-            // 2. 更新分數
             if(playerRole === 'host') {
                 document.getElementById('myScore').innerText = data.hostScore;
                 document.getElementById('oppScore').innerText = data.guestScore;
@@ -780,24 +735,33 @@
                 document.getElementById('oppScore').innerText = data.hostScore;
             }
 
-            // 檢查是否兩人都回答完畢，若是房主則觸發下一題
+            // 🔥 修改點：雙方回答完後的邏輯
             if(playerRole === 'host' && data.status === 'playing') {
                 if(data.hostAnswered && data.guestAnswered) {
-                    if(localQIndex === data.currentQIndex) {
-                         triggerNextQuestion();
+                    // 只有當尚未進入「過渡狀態」且題號一致時才觸發
+                    if(!isTransitioning && localQIndex === data.currentQIndex) {
+                        isTransitioning = true;
+                        // 延遲 2.5 秒，讓玩家看結果
+                        setTimeout(() => {
+                            triggerNextQuestion();
+                        }, 2500);
                     }
                 }
             }
+            
+            // 如果我是等待方，看到雙方都答了，UI 提示變化
+            if(data.status === 'playing' && data.hostAnswered && data.guestAnswered && localHasAnswered) {
+                document.getElementById('feedbackText').innerText = "👀 雙方已作答，即將換題...";
+                document.getElementById('feedbackText').style.color = "#888";
+            }
 
-            // 3. 遊戲狀態控制
             if(data.status === 'playing') {
-                // 如果本地還沒進遊戲畫面，且題目還沒載入，先載入
                 if(questions.length === 0) {
                      loadQuestionsAndParse(data.topicUrl).then(() => {
-                        handleGameSync(data); // 載入完後執行同步
+                        handleGameSync(data); 
                      });
                 } else {
-                    handleGameSync(data); // 題目已載入，直接同步
+                    handleGameSync(data); 
                 }
             } else if (data.status === 'finished') {
                 endGame(data);
@@ -806,7 +770,6 @@
     }
 
     window.triggerStartGame = () => {
-        // 房主觸發開始：設定第一題和開始時間
         update(ref(db, 'rooms/' + currentRoomId), { 
             status: 'playing',
             currentQIndex: 0,
@@ -816,7 +779,6 @@
         });
     }
 
-    // 🆕 處理遊戲畫面同步 (核心同步函式)
     function handleGameSync(data) {
         if(document.getElementById('gameSection').classList.contains('hidden')) {
             showSection('gameSection');
@@ -824,11 +786,13 @@
 
         // 檢查是否換題了 (Server 的 index 比本地大)
         if(data.currentQIndex > localQIndex) {
+            // 🔥 重置過渡鎖與答題鎖
+            isTransitioning = false; 
+            localHasAnswered = false;
             localQIndex = data.currentQIndex;
             renderQuestion(localQIndex);
         }
 
-        // 啟動倒數計時器 (依賴 Server 時間)
         startSyncTimer(data.qStartTime);
     }
 
@@ -869,11 +833,8 @@
         questions = questions.slice(0, totalQuestions);
     }
 
-    // 渲染題目
     function renderQuestion(index) {
         if(index >= questions.length) {
-            // 題目結束，等待所有人完成或直接顯示結果
-            // 這裡不做動作，等待 server status 變更為 finished
             return;
         }
 
@@ -885,53 +846,52 @@
             btn.innerText = q.options[idx];
             btn.disabled = false;
             btn.classList.remove('correct', 'wrong');
+            // 防止舊的 onclick 殘留
             btn.onclick = () => window.answer(idx + 1);
         });
 
         document.getElementById('feedbackText').innerText = "";
     }
 
-    // 🆕 同步計時器
     function startSyncTimer(startTime) {
         clearInterval(syncTimerInterval);
         
-        // 立即執行一次
         updateTimerUI(startTime);
 
         syncTimerInterval = setInterval(() => {
             updateTimerUI(startTime);
-        }, 100); // 這裡的頻率只影響 UI 滑順度，不影響邏輯
+        }, 100); 
     }
 
     function updateTimerUI(startTime) {
-        if(localQIndex >= questions.length) return; // 結束後不計時
+        if(localQIndex >= questions.length) return; 
 
         const now = Date.now();
         const elapsed = now - startTime;
-        const timeLimit = 10000; // 10秒
+        const timeLimit = 10000; 
         const remaining = Math.max(0, Math.ceil((timeLimit - elapsed) / 1000));
 
         const timerEl = document.getElementById('timeLeft');
         timerEl.innerText = remaining;
         timerEl.style.color = remaining <= 3 ? "#FF6B6B" : "#333";
 
-        // 時間到邏輯：由房主負責觸發下一題
-        if(elapsed > timeLimit + 1000) { // 給 1 秒緩衝
+        // 🔥 修改點：防止與「雙方答完」的邏輯衝突
+        // 如果正在過渡中 (等待 2.5 秒)，就不要因為時間到而觸發
+        if(elapsed > timeLimit + 1000 && !isTransitioning) { 
             if(playerRole === 'host') {
                 triggerNextQuestion();
             }
         }
     }
 
-    // 🆕 房主觸發下一題
     function triggerNextQuestion() {
+        // 🔥 確保不會在時間到時重複觸發
+        // 這裡不需要檢查 isTransitioning，因為這個函式本身就是結果
         const nextIndex = localQIndex + 1;
         
         if(nextIndex >= totalQuestions) {
-            // 遊戲結束
             update(ref(db, 'rooms/' + currentRoomId), { status: 'finished' });
         } else {
-            // 下一題，並重置時間
             update(ref(db, 'rooms/' + currentRoomId), { 
                 currentQIndex: nextIndex,
                 qStartTime: Date.now(),
@@ -939,20 +899,25 @@
                 guestAnswered: false
             });
         }
+        // 重置鎖（本地 handleSync 會再重置一次，這裡是保險）
+        isTransitioning = false;
     }
 
-    // 作答邏輯
     window.answer = (choice) => {
-        // 禁止重複作答
+        // 🔥 本地鎖：防止重複點擊
+        if(localHasAnswered) return;
+        localHasAnswered = true;
+
         const btns = document.querySelectorAll('.option-btn');
         btns.forEach(b => b.disabled = true);
 
         const correctAns = questions[localQIndex].ans;
         const isCorrect = (choice === correctAns);
 
+        // 立即顯示結果
         if(isCorrect) {
             btns[choice-1].classList.add('correct');
-            document.getElementById('feedbackText').innerText = "答對啦！🎉";
+            document.getElementById('feedbackText').innerText = "答對啦！🎉 (等待對手...)";
             document.getElementById('feedbackText').style.color = "#4CD137";
             score += 100;
         } else {
@@ -960,11 +925,10 @@
             if(correctAns > 0 && correctAns <= 4) {
                  btns[correctAns-1].classList.add('correct'); 
             }
-            document.getElementById('feedbackText').innerText = "哎呀答錯了... 😱";
+            document.getElementById('feedbackText').innerText = "哎呀答錯了... 😱 (等待對手...)";
             document.getElementById('feedbackText').style.color = "#FF6B6B";
         }
 
-        // 更新分數與回答狀態
         if(playerRole === 'host') {
             update(ref(db, 'rooms/' + currentRoomId), { 
                 hostScore: score,
@@ -1008,7 +972,9 @@
         
         score = 0;
         localQIndex = -1;
-        questions = []; // 清空題目以便重新抓取或重洗
+        questions = []; 
+        isTransitioning = false; // 重置鎖
+        localHasAnswered = false;
         
         document.getElementById('displayRoomCode').innerText = currentRoomId;
         
@@ -1050,7 +1016,6 @@
         });
     }
 
-    // 檢查自動登入
     (function checkAutoLogin() {
         const savedUser = localStorage.getItem('cheese_king_username');
         if(savedUser) {
