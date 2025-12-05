@@ -514,11 +514,14 @@
     let totalQuestions = 5;
     let roomSeed = 0;
     
+    // ✨ 新增：題目時間限制 (預設 10 秒)
+    let questionTimeLimit = 10;
+    
     // 🔐 核心鎖：防止重複過渡
     let isTransitioning = false;
     // 🔐 本地答題鎖：防止一題多答
     let localHasAnswered = false;
-    // 🔐 🔥 新增：暫停標記 (解決計時器殭屍問題)
+    // 🔐 暫停標記 (解決計時器殭屍問題)
     let isPaused = false;
 
     let isRegisterMode = false;
@@ -570,7 +573,7 @@
             title.innerText = "登入遊戲";
             btn.innerText = "登入";
             link.innerText = "還沒註冊？點此創建帳號";
-            btn.classList.replace('btn-purple', 'btn-primary');
+            btn.classList.replace('btn-primary', 'btn-primary');
         }
     }
 
@@ -832,6 +835,30 @@
 
     function parseCSV(csvText) {
         const lines = csvText.split('\n');
+        
+        // ✨ 新增：讀取 H1 (Array index 7) 設定時間
+        // CSV 格式：A, B, C, D, E, F, G, H
+        // Index:    0, 1, 2, 3, 4, 5, 6, 7
+        try {
+            if (lines.length > 0) {
+                const headerRow = lines[0].split(',');
+                if (headerRow.length >= 8) {
+                    const h1Val = headerRow[7].replace(/["\r]/g, '').trim(); 
+                    const parsedTime = parseInt(h1Val);
+                    if (!isNaN(parsedTime) && parsedTime > 0) {
+                        questionTimeLimit = parsedTime;
+                    } else {
+                        questionTimeLimit = 10;
+                    }
+                } else {
+                    questionTimeLimit = 10;
+                }
+            }
+        } catch(e) {
+            console.error("時間讀取失敗，使用預設值", e);
+            questionTimeLimit = 10;
+        }
+
         questions = [];
         for(let i = 1; i < lines.length; i++) {
             const row = lines[i].split(',');
@@ -884,7 +911,10 @@
 
         const now = Date.now();
         const elapsed = now - startTime;
-        const timeLimit = 10000; 
+        
+        // ✨ 修改：使用從 CSV 讀取的時間
+        const timeLimit = questionTimeLimit * 1000; 
+        
         const remaining = Math.max(0, Math.ceil((timeLimit - elapsed) / 1000));
 
         const timerEl = document.getElementById('timeLeft');
