@@ -736,15 +736,18 @@
             }
 
             // 🔥 修改點：雙方回答完後的邏輯
-            if(playerRole === 'host' && data.status === 'playing') {
-                if(data.hostAnswered && data.guestAnswered) {
+            if(data.status === 'playing' && data.hostAnswered && data.guestAnswered) {
+                // 🔥 立即停止計時器 (視覺暫停)
+                clearInterval(syncTimerInterval);
+
+                if(playerRole === 'host') {
                     // 只有當尚未進入「過渡狀態」且題號一致時才觸發
                     if(!isTransitioning && localQIndex === data.currentQIndex) {
                         isTransitioning = true;
-                        // 延遲 2.5 秒，讓玩家看結果
+                        // 🔥 延遲 1.5 秒 (1500ms)，讓玩家看結果
                         setTimeout(() => {
                             triggerNextQuestion();
-                        }, 2500);
+                        }, 1500);
                     }
                 }
             }
@@ -876,7 +879,7 @@
         timerEl.style.color = remaining <= 3 ? "#FF6B6B" : "#333";
 
         // 🔥 修改點：防止與「雙方答完」的邏輯衝突
-        // 如果正在過渡中 (等待 2.5 秒)，就不要因為時間到而觸發
+        // 如果正在過渡中 (等待中)，就不要因為時間到而觸發
         if(elapsed > timeLimit + 1000 && !isTransitioning) { 
             if(playerRole === 'host') {
                 triggerNextQuestion();
