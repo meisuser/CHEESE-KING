@@ -518,6 +518,8 @@
     let isTransitioning = false;
     // 🔐 本地答題鎖：防止一題多答
     let localHasAnswered = false;
+    // 🔐 🔥 新增：暫停標記 (解決計時器殭屍問題)
+    let isPaused = false;
 
     let isRegisterMode = false;
 
@@ -735,10 +737,14 @@
                 document.getElementById('oppScore').innerText = data.hostScore;
             }
 
-            // 🔥 修改點：雙方回答完後的邏輯
+            // 🔥 核心邏輯修改：雙方回答完後進入「暫停狀態」
             if(data.status === 'playing' && data.hostAnswered && data.guestAnswered) {
-                // 🔥 立即停止計時器 (視覺暫停)
-                clearInterval(syncTimerInterval);
+                
+                // 只有第一次進入此狀態時才執行暫停
+                if (!isPaused) {
+                    isPaused = true; // ✅ 鎖定：設置為暫停
+                    clearInterval(syncTimerInterval); // ✅ 強制停止計時器
+                }
 
                 if(playerRole === 'host') {
                     // 只有當尚未進入「過渡狀態」且題號一致時才觸發
@@ -789,14 +795,21 @@
 
         // 檢查是否換題了 (Server 的 index 比本地大)
         if(data.currentQIndex > localQIndex) {
-            // 🔥 重置過渡鎖與答題鎖
+            // 🔥 重置過渡鎖、答題鎖與暫停鎖
             isTransitioning = false; 
             localHasAnswered = false;
+            isPaused = false; // ✅ 解鎖：恢復為非暫停狀態
             localQIndex = data.currentQIndex;
             renderQuestion(localQIndex);
         }
 
-        startSyncTimer(data.qStartTime);
+        // 🔥 關鍵修改：只有在「非暫停」狀態下才啟動/更新計時器
+        if (!isPaused) {
+            startSyncTimer(data.qStartTime);
+        } else {
+            // 雙重保險：如果是暫停狀態，確保清除計時器
+            clearInterval(syncTimerInterval);
+        }
     }
 
     async function loadQuestionsAndParse(csvUrl) {
@@ -880,7 +893,8 @@
 
         // 🔥 修改點：防止與「雙方答完」的邏輯衝突
         // 如果正在過渡中 (等待中)，就不要因為時間到而觸發
-        if(elapsed > timeLimit + 1000 && !isTransitioning) { 
+        // 這裡的 !isPaused 也是一個保護，確保暫停時不會觸發超時邏輯
+        if(elapsed > timeLimit + 1000 && !isTransitioning && !isPaused) { 
             if(playerRole === 'host') {
                 triggerNextQuestion();
             }
@@ -978,6 +992,7 @@
         questions = []; 
         isTransitioning = false; // 重置鎖
         localHasAnswered = false;
+        isPaused = false; // 重置鎖
         
         document.getElementById('displayRoomCode').innerText = currentRoomId;
         
